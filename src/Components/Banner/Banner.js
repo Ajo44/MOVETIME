@@ -6,15 +6,12 @@ import { API_KEY, img_url } from "../../constants/constants";
 
 function Banner() {
   const [movie, setMovie] = useState();
-  let data;
   useEffect(() => {
     axios
       .get(`trending/all/week?api_key=${API_KEY}&language=en-US`)
       .then(function (response) {
         // console.log(response.data.results[0]);
         //setMovie(response.data.results[0]);
-        data = response;
-        console.log(data);
         console.log(response);
         setMovie(
           response.data.results.sort(function (a, b) {
