@@ -10,11 +10,11 @@ function Navbar() {
     axios
       .get(`trending/all/week?api_key=${API_KEY}&language=en-US`)
       .then(function (response) {
-        console.log(response.data.results);
         if (car.length > 0) {
           let query = car.toLowerCase();
           for (const key in response.data.results) {
-            let fruit = response.data.results[key].title.tolowercase();
+            let fruit = response.data.results[key].title;
+            console.log(response.data.results[1].title);
             if (fruit.slice(0, query.length).indexof(query) !== -1) {
               setTwo((prev) => {
                 return [...prev, response.data.results[key].title];
@@ -25,7 +25,7 @@ function Navbar() {
           setTwo([]);
         }
       });
-  }, []);
+  });
   return (
     <div className="navbar">
       <img
@@ -42,8 +42,8 @@ function Navbar() {
         />
         <div className="searchresult">
           {two.map((data, index) => (
-            <a href="#" key="index">
-              <div className="show">{two}</div>
+            <a href="#" key={index}>
+              <div className="show">{data}</div>
             </a>
           ))}
         </div>

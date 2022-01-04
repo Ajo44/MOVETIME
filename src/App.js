@@ -5,7 +5,7 @@ import Banner from "./Components/Banner/Banner";
 import Rowpost from "./Components/rowpost/Rowpost";
 import { action, originals, comedy } from "./urls";
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <Navbar />

@@ -12,7 +12,6 @@ function Banner() {
       .then(function (response) {
         // console.log(response.data.results[0]);
         //setMovie(response.data.results[0]);
-        console.log(response);
         setMovie(
           response.data.results.sort(function (a, b) {
             return 0.5 - Math.random();
