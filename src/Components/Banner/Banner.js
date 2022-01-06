@@ -11,7 +11,7 @@ function Banner() {
       .get(`trending/all/week?api_key=${API_KEY}&language=en-US`)
       .then(function (response) {
         // console.log(response.data.results[0]);
-        //setMovie(response.data.results[0]);
+        setMovie(response.data.results);
         setMovie(
           response.data.results.sort(function (a, b) {
             return 0.5 - Math.random();
@@ -30,7 +30,7 @@ function Banner() {
       className="banner"
     >
       <div className="content">
-        <h1 className="title">{movie ? movie.title : ""}</h1>
+        <h1 className="mtitle">{movie ? movie.title : ""}</h1>
         <div className="banner_button">
           <button className="button">Play</button>
           <button className="button">my list</button>

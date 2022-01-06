@@ -6,26 +6,29 @@ import { API_KEY } from "../../constants/constants";
 function Navbar() {
   const [car, setCar] = useState("");
   const [two, setTwo] = useState([]);
+  const [sugg, setSugg] = useState([]);
   useEffect(() => {
-    axios
-      .get(`trending/all/week?api_key=${API_KEY}&language=en-US`)
-      .then(function (response) {
-        if (car.length > 0) {
+    if (car.length > 0) {
+      axios
+        .get(`trending/all/week?api_key=${API_KEY}&language=en-US`)
+        .then((res) => res.data.results)
+        .then((responsedata) => {
           let query = car.toLowerCase();
-          for (const key in response.data.results) {
-            let fruit = response.data.results[key].title;
-            console.log(response.data.results[1].title);
-            if (fruit.slice(0, query.length).indexof(query) !== -1) {
+          for (const key in responsedata) {
+            let fruit = responsedata[key].title
+              ? responsedata[key].title
+              : responsedata[key].original_name.toLowerCase();
+
+            console.log(fruit);
+            if (fruit.slice(0, query.length).indexOf(query) !== -1) {
               setTwo((prev) => {
-                return [...prev, response.data.results[key].title];
+                return [...prev, responsedata[key].title];
               });
             }
           }
-        } else {
-          setTwo([]);
-        }
-      });
-  });
+        });
+    }
+  }, [car]);
   return (
     <div className="navbar">
       <img
@@ -42,7 +45,7 @@ function Navbar() {
         />
         <div className="searchresult">
           {two.map((data, index) => (
-            <a href="#" key={index}>
+            <a href="http://localhost:3000/" key={index}>
               <div className="show">{data}</div>
             </a>
           ))}
