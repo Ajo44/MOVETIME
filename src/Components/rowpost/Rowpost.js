@@ -8,13 +8,11 @@ function Rowpost(props) {
   const [movies, setMovies] = useState([]);
   const [id, setId] = useState("");
   useEffect(() => {
-    axios
-      .get(`trending/all/week?api_key=${API_KEY}&language=en-US`)
-      .then((response) => {
-        // console.log(response.data.results);
-        setMovies(response.data.results);
-        //console.log(props.url);
-      });
+    axios.get(props.url).then((response) => {
+      // console.log(response.data.results);
+      setMovies(response.data.results);
+      //console.log(props.url);
+    });
   }, []);
   const opts = {
     height: "390",
